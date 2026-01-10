@@ -1,74 +1,45 @@
 package ru.netology.testmode.data;
 
 import com.github.javafaker.Faker;
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
-import io.restassured.specification.RequestSpecification;
-import lombok.Value;
-
-import java.util.Locale;
 
 import static io.restassured.RestAssured.given;
 
 public class DataGenerator {
 
-    private static final RequestSpecification requestSpec = new RequestSpecBuilder()
-            .setBaseUri("http://localhost")
-            .setPort(9999)
-            .setAccept(ContentType.JSON)
-            .setContentType(ContentType.JSON)
-            .log(LogDetail.ALL)
-            .build();
+    private static final Faker faker = new Faker();
 
-    private static final Faker faker = new Faker(new Locale("en"));
+    private DataGenerator() {}
 
-    private DataGenerator() {
+    public static UserInfo getRegisteredUser(String status) {
+        UserInfo user = new UserInfo(
+                faker.name().username(),
+                faker.internet().password(),
+                status
+        );
+
+        sendRequest(user);
+        return user;
     }
 
-    private static void sendRequest(RegistrationDto user) {
+    public static UserInfo getUser(String status) {
+        return new UserInfo(
+                faker.name().username(),
+                faker.internet().password(),
+                status
+        );
+    }
+
+    private static void sendRequest(UserInfo user) {
         given()
-                .spec(requestSpec)
+                .baseUri("http://localhost")
+                .port(9999)
+                .contentType(ContentType.JSON)
                 .body(user)
                 .when()
                 .post("/api/system/users")
                 .then()
                 .statusCode(200);
-    }
-
-    public static String getRandomLogin() {
-        return faker.name().username();
-    }
-
-    public static String getRandomPassword() {
-        return faker.internet().password();
-    }
-
-    public static class Registration {
-
-        private Registration() {
-        }
-
-        public static RegistrationDto getUser(String status) {
-            return new RegistrationDto(
-                    getRandomLogin(),
-                    getRandomPassword(),
-                    status
-            );
-        }
-
-        public static RegistrationDto getRegisteredUser(String status) {
-            RegistrationDto registeredUser = getUser(status);
-            sendRequest(registeredUser);
-            return registeredUser;
-        }
-    }
-
-    @Value
-    public static class RegistrationDto {
-        String login;
-        String password;
-        String status;
     }
 }
 
