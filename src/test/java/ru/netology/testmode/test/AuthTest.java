@@ -7,6 +7,7 @@ import ru.netology.testmode.data.UserInfo;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 
 public class AuthTest {
 
@@ -23,7 +24,10 @@ public class AuthTest {
         $("[data-test-id=password] input").setValue(user.getPassword());
         $$("button").find(text("Продолжить")).click();
 
-        $("h2").shouldHave(text("Личный кабинет"));
+        $("h2")
+                .shouldBe(visible)
+                .shouldHave(text("Личный кабинет"));
     }
 }
+
 
