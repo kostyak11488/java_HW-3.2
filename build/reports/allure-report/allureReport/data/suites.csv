@@ -1,0 +1,6 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"failed","Mon Jan 26 09:22:05 MSK 2026","Mon Jan 26 09:22:06 MSK 2026","72","","ru.netology.testmode.test.AuthTest","","ru.netology.testmode.test.AuthTest","shouldGetErrorIfWrongLogin","Should get error if login with wrong login",""
+"failed","Mon Jan 26 09:22:05 MSK 2026","Mon Jan 26 09:22:05 MSK 2026","82","","ru.netology.testmode.test.AuthTest","","ru.netology.testmode.test.AuthTest","shouldGetErrorIfWrongPassword","Should get error if login with wrong password",""
+"passed","Mon Jan 26 09:21:56 MSK 2026","Mon Jan 26 09:22:04 MSK 2026","7161","","ru.netology.testmode.test.AuthTest","","ru.netology.testmode.test.AuthTest","shouldGetErrorIfNotRegisteredUser","Should get error if login with not registered user",""
+"failed","Mon Jan 26 09:22:04 MSK 2026","Mon Jan 26 09:22:05 MSK 2026","1588","","ru.netology.testmode.test.AuthTest","","ru.netology.testmode.test.AuthTest","shouldGetErrorIfBlockedUser","Should get error if login with blocked user",""
+"failed","Mon Jan 26 09:22:05 MSK 2026","Mon Jan 26 09:22:05 MSK 2026","116","","ru.netology.testmode.test.AuthTest","","ru.netology.testmode.test.AuthTest","shouldSuccessfulLoginIfRegisteredActiveUser","Should successfully login with active registered user",""
